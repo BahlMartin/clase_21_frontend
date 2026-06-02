@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link , useSearchParams} from 'react-router'
 import useForm from '../../hooks/useForm'
-import login from '../../services/authService'
+import {login} from '../../services/authService'
 
 
 const LoginScreen = () => {

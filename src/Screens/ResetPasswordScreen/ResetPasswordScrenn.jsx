@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, useSearchParams } from 'react-router'
-import resetPassword from '../../services/authService'
+import {resetPassword} from '../../services/authService'
 
 const ResetPasswordScrenn = () => {
     const [searchParams, setSearchParams] = useSearchParams()
