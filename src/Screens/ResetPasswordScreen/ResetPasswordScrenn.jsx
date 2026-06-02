@@ -4,8 +4,9 @@ import { Navigate, useSearchParams } from 'react-router'
 const ResetPasswordScrenn = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const reser_password_token = searchParams.get('reset_password_token')
-    if(!reser_password_token){
+    const reset_password_token = searchParams.get('reset_password_token')
+
+    if(!reset_password_token){
         return <Navigate to={'/login'} />
     }
     return (
