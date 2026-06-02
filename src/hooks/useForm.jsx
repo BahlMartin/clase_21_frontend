@@ -1,0 +1,29 @@
+import { useState } from 'react'
+
+function useForm(initial_form_state, submitFn) {
+
+    const [formState, setFormState] = useState(initial_form_state)
+
+    function handleChange(event){
+        const field_name = event.target.name
+        const field_value = event.target.value
+        setFormState((prev_state) => {
+            return {
+                ...prev_state,
+                [field_name]: field_value
+            }
+        })
+    }
+
+    function handleSubmit(event){
+        event.preventDefault()
+        submitFn(formState)
+    }
+    return{
+        formState,
+        handleChange,
+        handleSubmit
+    }
+}
+
+export default useForm
