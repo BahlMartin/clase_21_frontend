@@ -1,28 +1,37 @@
 import React from 'react'
 import { Navigate, useSearchParams } from 'react-router'
-import {resetPassword} from '../../services/authService'
+import { resetPassword } from '../../services/authService'
+import useForm from '../../hooks/useForm'
 
 const ResetPasswordScrenn = () => {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
 
     const reset_password_token = searchParams.get('reset_password_token')
 
     if(!reset_password_token){
         return <Navigate to={'/login'} />
     }
+
+    const initial_form_state = {
+        password: '',
+        password_confirmation: ''
+    }
+
     function onSubmit(formData){
         if (formData.password !== formData.password_confirmation){
             alert('Las contraseñas no coinciden')
-            return <Navigate to={'/reset-password?reset_password_token=' + reset_password_token} />
+            return
         }
         resetPassword(formData.password, reset_password_token)
     }
-    const { handleSubmit } = useForm(initial_form_state, onSubmit)
+
+    const { formState, handleChange, handleSubmit } = useForm(initial_form_state, onSubmit)
+
     return (
         <div>
             <h1>Restablecer Contraseña</h1>
 
-            <form action="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="password">Nueva contraseña</label>
                     <input type="password" name='password' id='password' value={formState.password} onChange={handleChange} />
